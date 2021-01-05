@@ -8,6 +8,23 @@
   </div>
 </template>
 
+<script>
+import axios from '@/utils/axios'
+export default {
+  mounted () {
+    this.getData()
+  },
+  methods: {
+    async getData() {
+      const res = await axios({
+        url: 'list'
+      })
+      console.log(res)
+    }
+  },
+}
+</script>
+
 <style lang="scss">
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
