@@ -15,7 +15,7 @@
   export default {
     data() {
       return {
-        navItems: ['首页', '电影', '电视', '博客', '知乎', '微博']
+        navItems: ['首页', '电影', '电视', '微博', '知乎', '掘金', '股市', '体育']
       }
     },
   }
@@ -31,6 +31,7 @@
     display: flex;
     align-items: center;
     justify-content: space-around;
+    z-index: 9999;
     .logo {
       width: 55px;
     }

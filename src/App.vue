@@ -4,15 +4,18 @@
     <div class="content">
       <router-view/>
     </div>
+    <common-footer></common-footer>
   </div>
 </template>
 
 <script>
 import axios from '@/utils/axios'
 import CommonHeader from '@/components/Header.vue'
+import CommonFooter from '@/components/Footer.vue'
 export default {
   components: {
     CommonHeader,
+    CommonFooter
   },
   mounted () {
     this.getData()
