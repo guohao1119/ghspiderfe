@@ -5,10 +5,7 @@
       <span class="titletext">{{title}}</span>
     </div>
     <ul class="infolist">
-      <li>墨西哥各界反对美国钢铝关税措施</li>
-      <li>墨西哥各界反对美国钢铝关税措施</li>
-      <li>墨西哥各界反对美国钢铝关税措施</li>
-      <li>墨西哥各界反对美国钢铝关税措施</li>
+      <li v-for="(item, index) in data" :key="index">{{item.title}}</li>
     </ul>
   </div>
 </template>
@@ -23,6 +20,12 @@
       icon: {
         type: String,
         default: ''
+      },
+      data: {
+        type: Array,
+        default: () => {
+          return []
+        }
       }
     },
 

@@ -9,25 +9,13 @@
 </template>
 
 <script>
-import axios from '@/utils/axios'
 import CommonHeader from '@/components/Header.vue'
 import CommonFooter from '@/components/Footer.vue'
 export default {
   components: {
     CommonHeader,
     CommonFooter
-  },
-  mounted () {
-    this.getData()
-  },
-  methods: {
-    async getData() {
-      const res = await axios({
-        url: 'list'
-      })
-      console.log(res)
-    }
-  },
+  }
 }
 </script>
 
