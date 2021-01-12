@@ -25,8 +25,13 @@
           this.$router.push({path: '/'})
           return
         }
+        if (item === '电影') {
+          if (this.$route.name === 'Movie') return
+          this.$router.push({path: '/movie'})
+          return
+        }
         this.$message({
-          message: '模块开发中，敬请期待~',
+          message: '功能开发中，敬请期待~',
           type: 'success'
         })
       }
