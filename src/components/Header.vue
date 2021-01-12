@@ -5,7 +5,7 @@
     </a>
     <div class="nav">
       <ul class="nav-ul">
-        <li v-for="(item, index) in navItems" :key="index">{{item}}</li>
+        <li v-for="(item, index) in navItems" :key="index" @click="itemClick(item)">{{item}}</li>
       </ul>
     </div>
   </div>
@@ -16,6 +16,19 @@
     data() {
       return {
         navItems: ['首页', '电影', '电视', '微博', '知乎', '掘金', '股市', '体育']
+      }
+    },
+    methods: {
+      itemClick(item) {
+        if (item === '首页') {
+          if (this.$route.name === 'Home') return
+          this.$router.push({path: '/'})
+          return
+        }
+        this.$message({
+          message: '模块开发中，敬请期待~',
+          type: 'success'
+        })
       }
     },
   }
@@ -31,7 +44,7 @@
     display: flex;
     align-items: center;
     justify-content: space-around;
-    z-index: 9999;
+    // z-index: 9999;
     .logo {
       width: 55px;
     }

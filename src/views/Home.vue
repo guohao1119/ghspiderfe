@@ -1,12 +1,12 @@
 <template>
   <div class="home">
-    <carousel></carousel>
+    <carousel :dataList="sliderDataList"></carousel>
     <div class="home-list">
-      <home-list title="热门电影" icon="el-icon-video-camera-solid" :data="movieList"></home-list>
-      <home-list title="热门电视剧" icon="el-icon-video-camera-solid" :data="tvlist"></home-list>
-      <home-list title="微博热搜" icon="el-icon-video-camera-solid" :data="weibolist"></home-list>
-      <home-list title="最新日报" icon="el-icon-video-camera-solid" :data="zhihulist"></home-list>
-      <home-list title="最新博客" icon="el-icon-video-camera-solid" :data="juejinlist"></home-list>
+      <home-list title="热门电影" :imgUrl="require('@/assets/images/icon/movie.svg')" :data="movieList"></home-list>
+      <home-list title="热门电视剧" :imgUrl="require('@/assets/images/icon/tv.svg')" :data="tvlist"></home-list>
+      <home-list title="微博热搜" :imgUrl="require('@/assets/images/icon/weibo.svg')" :data="weibolist"></home-list>
+      <home-list title="最新日报" :imgUrl="require('@/assets/images/icon/zhihu.svg')" :data="zhihulist"></home-list>
+      <home-list title="最新博客" :imgUrl="require('@/assets/images/icon/juejin.svg')" :data="juejinlist"></home-list>
     </div>
   </div>
 </template>
@@ -25,6 +25,7 @@ export default {
   },
   data() {
     return {
+      sliderDataList: [],
       showNumber: 10,
       movieList: [],
       tvlist: [],
@@ -38,11 +39,23 @@ export default {
   },
   methods: {
     getData() {
+      this.getSliderData()
       this.getDataOfMovie()
       this.getDataOfTV()
       this.getDataOfWeibo()
       this.getDataOfZhihu()
       this.getDataOfJuejin()
+    },
+    async getSliderData() {
+      const res = await axios({
+        url: 'sliderdatalist'
+      })
+      console.log(res)
+      // this.sliderDataList = []
+      // res.data.forEach(item => {
+      //   this.sliderDataList.push()
+      // });
+      this.sliderDataList = res.data
     },
     async getDataOfMovie() {
       const res = await axios({
