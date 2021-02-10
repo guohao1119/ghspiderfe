@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <common-header></common-header>
-    <div class="content">
+    <div class="content" :style="{height: contentHeight + 'px'}">
       <router-view/>
     </div>
     <common-footer></common-footer>
@@ -15,6 +15,25 @@ export default {
   components: {
     CommonHeader,
     CommonFooter
+  },
+  data() {
+    return {
+      contentHeight: 0
+    }
+  },
+  mounted() {
+    this.setContentHeight()
+    this.resize()
+  },
+  methods: {
+    setContentHeight() {
+      this.contentHeight = window.innerHeight - 220
+    },
+    resize() {
+      window.addEventListener('resize', () => {
+        this.contentHeight = window.innerHeight - 220
+      })
+    }
   }
 }
 </script>

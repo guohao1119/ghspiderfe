@@ -15,7 +15,7 @@
   export default {
     data() {
       return {
-        navItems: ['首页', '电影', '电视', '微博', '知乎', '掘金', '股市', '体育']
+        navItems: ['首页', '电影', '电视', '微博', '知乎', '掘金', '股市', '体育', '信息查询']
       }
     },
     methods: {
@@ -28,6 +28,11 @@
         if (item === '电影') {
           if (this.$route.name === 'Movie') return
           this.$router.push({path: '/movie'})
+          return
+        }
+        if (item === '信息查询') {
+          if (this.$route.name === 'InfoSearch') return
+          this.$router.push({path: '/infosearch'})
           return
         }
         this.$message({
