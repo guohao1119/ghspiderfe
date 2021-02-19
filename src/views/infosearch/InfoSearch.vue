@@ -5,7 +5,7 @@
     <!-- <el-button type="primary" @click="onDownload('zxgk')" v-show="isShow">下载</el-button> -->
     <ul class="ul-result">
       <li v-for="(item, key) in fileList" :key="key">
-        <p>{{item}} <a class="download-link" target="_blank" :href="download(item)">下载</a></p>
+        <p>{{item}} <a :ref="'link' + key" class="download-link" target="_blank" :href="download(item)">下载</a></p>
       </li>
     </ul>
   </div>
@@ -44,6 +44,11 @@ export default {
       this.isShow = true
       console.log(res)
       this.fileList = res.data
+      this.fileList.forEach((item, index) => {
+        this.$nextTick(() => {
+          this.$refs['link'+ index][0].click()
+        })
+      })
     },
     download(item) {
       // python后台路径

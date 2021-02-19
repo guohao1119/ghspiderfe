@@ -5,7 +5,7 @@ const vueInstance = new Vue()
 // let loadingInstance
 const axiosInstance = axios.create({
   baseURL: '/api/',
-  timeout: 20000 // 请求超时时间： 20s
+  timeout: 60000 // 请求超时时间： 20s
 })
 
 // 请求拦截
