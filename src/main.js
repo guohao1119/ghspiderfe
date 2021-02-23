@@ -2,7 +2,7 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
-import { Button, Carousel, CarouselItem, Input, Message, MessageBox } from 'element-ui';
+import { Button, Carousel, CarouselItem, Input, Message, MessageBox, Loading } from 'element-ui';
 
 import '@/assets/css/common.css'
 import '@/assets/icon/iconfont.css'
@@ -16,6 +16,7 @@ Vue.use(Button)
 
 Vue.prototype.$message = Message
 Vue.prototype.$alert = MessageBox.alert;
+Vue.prototype.$loading = Loading.service;
 
 new Vue({
   router,

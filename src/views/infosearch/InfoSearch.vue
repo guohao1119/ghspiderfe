@@ -2,10 +2,9 @@
   <div>
     <el-input class="input" v-model="companyName" placeholder="请输入要查询的公司名称"></el-input>
     <el-button type="primary" @click="onSearch">查询</el-button>
-    <!-- <el-button type="primary" @click="onDownload('zxgk')" v-show="isShow">下载</el-button> -->
-    <ul class="ul-result">
+    <ul class="ul-result" v-show="isShow">
       <li v-for="(item, key) in fileList" :key="key">
-        <p>{{item}} <a :ref="'link' + key" class="download-link" target="_blank" :href="download(item)">下载</a></p>
+        <p>{{item}} <a :ref="'link' + key" class="download-link" target="_blank" :href="download(item, key)">下载</a></p>
       </li>
     </ul>
   </div>
@@ -17,7 +16,7 @@ export default {
   data() {
     return {
       companyName: '',
-      isShow: true,
+      isShow: false,
       fileList: []
     }
   },
@@ -34,25 +33,30 @@ export default {
       this.getData()
     },
     async getData() {
+      const loading = this.$loading({
+        lock: true,
+        text: '正在为您查询该公司的相关信用信息，请耐心等候~',
+        spinner: 'el-icon-loading',
+        background: 'rgba(0, 0, 0, 0.7)'
+      });
       const res = await axios({
         url: 'info_search',
         params: {
           companyName: this.companyName
         }
       })
-      if (res.code !== 0) return
+      loading.close();
+      if (res.code !== 0 || res.data.length === 0) return
       this.isShow = true
-      console.log(res)
-      this.fileList = res.data
-      this.fileList.forEach((item, index) => {
-        this.$nextTick(() => {
-          this.$refs['link'+ index][0].click()
-        })
+      this.fileList = ['全部', ...res.data]
+      this.$nextTick(() => {
+        this.$refs['link0'][0].click()
       })
     },
-    download(item) {
+    download(item, key) {
       // python后台路径
-      return 'http://127.0.0.1:5000/download?filepath=' + item
+      if (key === 0) return 'http://127.0.0.1:5000/download_zip?filepath=zip/download_zip'
+      return 'http://127.0.0.1:5000/download?filepath=result/' + item + '.png'
     }
   }
 }
